@@ -5,9 +5,9 @@ from plyer import notification
 import pygame
 import os
 from datetime import datetime
+from PIL import Image, ImageTk
 
-
-class PomodoroPomocnik(ctk.CTk):
+class BeMindful(ctk.CTk):
     def __init__(self):
         super().__init__()
 
@@ -32,6 +32,17 @@ class PomodoroPomocnik(ctk.CTk):
 
         ctk.set_appearance_mode("light")
         ctk.set_default_color_theme("blue")
+
+        ico_file = "BeMindful.ico"
+        png_file = "BeMindful.png"
+
+        if os.path.exists(ico_file):
+            self.iconbitmap(ico_file)
+        elif os.path.exists(png_file):
+            # Alternatywne podejście dla systemów, które mogą obsługiwać PNG jako ikony
+            # (może nie działać we wszystkich wersjach Windows)
+            icon = ImageTk.PhotoImage(file=png_file)
+            self.iconphoto(True, icon)
 
         # Inicjalizacja pygame do odtwarzania dźwięków
         pygame.mixer.init()
@@ -348,5 +359,5 @@ class PomodoroPomocnik(ctk.CTk):
 
 
 if __name__ == "__main__":
-    app = PomodoroPomocnik()
+    app = BeMindful()
     app.mainloop()
